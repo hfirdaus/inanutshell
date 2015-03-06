@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">In a Nutshell</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_create">create</string>
+    <string name="create">Create</string>
+    <string name="edit">Edit</string>
+    <string name="find">find</string>
+    <string name="title_activity_create_or_parse">createOrParse</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="create_page_create">Create your own</string>
+    <string name="or">OR</string>
+    <string name="enterlink">Enter link here..</string>
+    <string name="retrieve_gointernet">Import from Link</string>
+    <string name="create_recipe_hint">Start making your awesome recipe here</string>
+    <string name="title_activity_search">search</string>
+    <string name="convert">convert</string>
+    <string name="title">Title *</string>
+    <string name="ingredients_text">Ingredients</string>
+    <string name="directions_text">Directions</string>
+    <string name="notes">Notes</string>
+    <string name="title_activity_convert">convert</string>
+    <string-array name="convert_options">
+        <item>pinch</item>
+        <item>dash</item>
+        <item>millilitre</item>
+        <item>tsp</item>
+        <item>tbsp</item>
+        <item>ounce</item>
+        <item>cup</item>
+        <item>pint</item>
+        <item>quart</item>
+        <item>litre</item>
+    </string-array>
+
+</resources>

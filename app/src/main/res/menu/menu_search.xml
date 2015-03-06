@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.hushcoolcat.inanutshell.search">
+    <item android:id="@+id/action_home"
+        android:title="home"
+        android:icon="@drawable/ic_action_home"
+        app:showAsAction="ifRoom"
+        android:onClick="onOptionsItemSelected"
+        />
+    <item android:id="@+id/search"
+        android:title="searchbar"
+        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
+        android:showAsAction="collapseActionView|ifRoom"
+        android:actionViewClass="android.widget.SearchView" />
+</menu>
