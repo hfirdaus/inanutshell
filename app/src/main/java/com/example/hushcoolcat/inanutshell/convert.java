@@ -4,8 +4,12 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class convert extends ActionBarActivity {
 
@@ -21,6 +25,14 @@ public class convert extends ActionBarActivity {
         ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.convert_options, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
+
+        Button button = (Button) findViewById(R.id.convertButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                convertValues(v);
+            }
+        });
     }
 
     @Override
@@ -43,5 +55,48 @@ public class convert extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void convertValues(View view) {
+        String fromValue = ((Spinner) findViewById(R.id.from_spinner)).getSelectedItem().toString();
+        String toValue = ((Spinner) findViewById(R.id.to_spinner)).getSelectedItem().toString();
+        double amount = Double.parseDouble(((EditText) findViewById(R.id.editText)).getText().toString());
+        TextView result = (TextView) findViewById(R.id.convertResult);
+        double resultAmount = amount*(1/toUnit(fromValue))*toUnit(toValue);
+        if ((resultAmount % 1) == 0) {
+            result.setText(String.format("%d", ((int) resultAmount)));
+        }
+        else {
+            result.setText(String.format("%.2f", resultAmount));
+        }
+    }
+
+    public double toUnit(String unit) {
+
+        switch (unit) {
+            case "cup":
+                return 4;
+            case "dash":
+                return 1536;
+            case "litre":
+                return 0.9463529544;
+            case "millilitre":
+                return 946.3529544;
+            case "ounce":
+                return 32;
+            case "pinch":
+                return 3072;
+            case "pint":
+                return 2;
+            case "quart":
+                return 1;
+            case "tbsp":
+                return 64;
+            case "tsp":
+                return 192;
+            default:
+                //should never happen
+                return 0;
+        }
     }
 }
