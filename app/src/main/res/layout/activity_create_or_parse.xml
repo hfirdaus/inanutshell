@@ -42,7 +42,7 @@
             android:textColor="@color/abc_primary_text_material_dark"
             android:layout_marginBottom="94dp"
             android:layout_weight="0.4"
-            android:onClick="onClick"/>
+            android:onClick="buttonPushed"/>
 
     </LinearLayout>
 

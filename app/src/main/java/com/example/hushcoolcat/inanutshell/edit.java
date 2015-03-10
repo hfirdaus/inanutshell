@@ -62,27 +62,39 @@ public class edit extends ActionBarActivity {
         EditText titleInput = (EditText) findViewById(R.id.title_input);
         EditText ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
         EditText directionsInput = (EditText) findViewById(R.id.directions_input);
+        EditText notesInput = (EditText)findViewById(R.id.notes_input);
 
         String title = titleInput.getText().toString();
         String ingredients = ingredientsInput.getText().toString();
         String directions = directionsInput.getText().toString();
+        String notes = directionsInput.getText().toString();
 
         String filename = title + ".txt";
-        String dataToSave = "Ingredients";
+        String dataToSave = "Ingredients" + ingredients+ "\n" + "Directions" + directions + "\n"
+                + "Notes" + notes;
         writeToStorage create = new writeToStorage(filename, dataToSave);
 
-        presentToast();
+        presentSaveToast();
     }
 
-    public void presentToast()
+    public void presentToast(CharSequence text)
     {
         Context context = getApplicationContext();
-        CharSequence text = "Recipe saved";
         int duration = Toast.LENGTH_SHORT;
 
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
+    }
+    public void presentSaveToast()
+    {
+        CharSequence text = "Recipe Saved";
+        presentToast(text);
+    }
+    public void presentDeleteToast()
+    {
+        CharSequence text = "Recipe deleted";
+        presentToast(text);
     }
     public void goHome()
     {

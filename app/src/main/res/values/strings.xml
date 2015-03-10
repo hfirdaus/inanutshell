@@ -21,6 +21,7 @@
     <string name="directions_text">Directions</string>
     <string name="notes">Notes</string>
     <string name="title_activity_convert">convert</string>
+
     <string-array name="convert_options">
         <item>pinch</item>
         <item>dash</item>
@@ -33,5 +34,7 @@
         <item>quart</item>
         <item>litre</item>
     </string-array>
+
+    <string name="title_activity_import_from_link">importFromLink</string>
 
 </resources>

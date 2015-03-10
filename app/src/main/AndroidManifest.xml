@@ -47,6 +47,10 @@
             android:name=".convert"
             android:label="@string/title_activity_convert" >
         </activity>
+        <activity
+            android:name=".importFromLink"
+            android:label="@string/title_activity_import_from_link" >
+        </activity>
     </application>
 
 </manifest>

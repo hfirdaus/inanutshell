@@ -36,9 +36,9 @@ public class createOrParse extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        StrictMode.ThreadPolicy policy = new StrictMode.
+        /*StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+        StrictMode.setThreadPolicy(policy);*/
         setContentView(R.layout.activity_create_or_parse);
     }
 
@@ -76,15 +76,15 @@ public class createOrParse extends ActionBarActivity {
 
         Intent intent = null;
         int id = view.getId();
-        if (id == R.id.write) {
+        if (id == R.id.write)
             intent = new Intent(this, edit.class);
-            startActivity(intent);
-        }}
+        else
+            intent = new Intent(this, importFromLink.class);
 
-            //EditText link = (EditText)findViewById(R.id.editText);
-            //String recipe = link.getText().toString();
+        startActivity(intent);
 
-            //intent= new Intent(this, search.class);
+    }
+
 
 
 
@@ -96,124 +96,6 @@ public class createOrParse extends ActionBarActivity {
     }
 
 
-/*    public void connectInternet(String stringUrl) {
-
-        ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            // fetch data
-            new DownloadWebpageTask().execute(stringUrl);
-        } else {
-            textView.setText("No network connection available.");
-        }
-
-    }
-
-    private class DownloadWebpageTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... urls) {
-
-            // params comes from the execute() call: params[0] is the url.
-            try {
-                return downloadUrl(urls[0]);
-            } catch (IOException e) {
-                return "Unable to retrieve web page. URL may be invalid.";
-            }
-        }
-        // onPostExecute displays the results of the AsyncTask.
-        @Override
-        protected void onPostExecute(String result) {
-            textView.setText(result);
-        }
-    }
-
-    // Given a URL, establishes an HttpUrlConnection and retrieves
-// the web page content as a InputStream, which it returns as
-// a string.
-    private String downloadUrl(String myurl) throws IOException {
-        InputStream is = null;
-        // Only display the first 500 characters of the retrieved
-        // web page content.
-        int len = 500;
-
-        try {
-            URL url = new URL(myurl);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-       //     conn.setReadTimeout(10000 /* milliseconds );
-      //  /*    conn.setConnectTimeout(15000 /* milliseconds);
-      /*      conn.setRequestMethod("GET");
-            conn.setDoInput(true);
-            // Starts the query
-            conn.connect();
-            int response = conn.getResponseCode();
-            Log.d(DEBUG_TAG, "The response is: " + response);
-            is = conn.getInputStream();
-
-            // Convert the InputStream into a string
-            String contentAsString = readIt(is, len);
-            return contentAsString;
-
-            // Makes sure that the InputStream is closed after the app is
-            // finished using it.
-        } finally {
-            if (is != null) {
-                is.close();
-            }
-        }
-    }
-    public String readIt(InputStream stream, int len) throws IOException, UnsupportedEncodingException {
-        Reader reader = null;
-        reader = new InputStreamReader(stream, "UTF-8");
-        char[] buffer = new char[len];
-        reader.read(buffer);
-        return new String(buffer);
-    }
-
-*/
-
-    public void onClick(View v) {
-        //EditText edtUrl = (EditText)findViewById(R.id.edtUrl);
-        //String siteUrl = edtUrl.getText().toString();
-        //(new ParseURL() ).execute(new String [] {siteUrl});
-       try {
-            URL url = new URL("http://www.vogella.com");
-            HttpURLConnection con = (HttpURLConnection) url
-                    .openConnection();
-            readStream(con.getInputStream());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-    }
-
-        private void readStream(InputStream in) {
-            BufferedReader reader = null;
-            try {
-                reader = new BufferedReader(new InputStreamReader(in));
-                String line = "";
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (reader != null) {
-                    try {
-                        reader.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-
-
-
-       // for (Element p: paragraphs)
-       //     System.out.println(p.text());
-       // System.out.print(document);
 
 
 }
