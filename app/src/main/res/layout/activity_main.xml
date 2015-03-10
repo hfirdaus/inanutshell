@@ -52,7 +52,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
 
-        android:onClick="buttonPushed"/>
+        />
 
     <Button
         android:layout_width="match_parent"
@@ -63,6 +63,7 @@
         android:background="@color/secondary_text_default_material_light"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="buttonPushed"/>
 
 </RelativeLayout>
