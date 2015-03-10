@@ -106,14 +106,19 @@ public class importFromLink extends ActionBarActivity {
                 buffer.append("Title: " + title + "\r\n");
 
                 // Get meta info
-                Elements metaElems = doc.select("meta");
+                Elements ingredients = doc.select("section");
                 buffer.append("META DATA\r\n");
-                for (Element metaElem : metaElems) {
-                    String name = metaElem.attr("name");
-                    String content = metaElem.attr("content");
-                    buffer.append("name [" + name + "] - content [" + content + "] \r\n");
-                }
 
+                for (Element p : ingredients) {
+                    //String name = p.attr("");
+
+                    //String content = metaElem.attr("content");
+                    //if(p.attr("class")=="recipe-ingredients")
+                    buffer.append(p.text() + "\n");
+
+                    //buffer.append("name [" + name + "] - content [" + content + "] \r\n");
+                }
+/*
                 Elements topicList = doc.select("h2.topic");
                 buffer.append("Topic list\r\n");
                 for (Element topic : topicList) {
@@ -121,12 +126,12 @@ public class importFromLink extends ActionBarActivity {
 
                     buffer.append("Data [" + data + "] \r\n");
                 }
-
+*/
             } catch (Throwable t) {
                 t.printStackTrace();
             }
 
-            //System.out.println(buffer.toString());
+            Log.d("hello", buffer.toString());
             return buffer.toString();
         }
 
