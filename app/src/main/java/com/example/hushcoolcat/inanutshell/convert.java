@@ -60,8 +60,15 @@ public class convert extends ActionBarActivity {
     public void convertValues(View view) {
         String fromValue = ((Spinner) findViewById(R.id.from_spinner)).getSelectedItem().toString();
         String toValue = ((Spinner) findViewById(R.id.to_spinner)).getSelectedItem().toString();
-        double amount = Double.parseDouble(((EditText) findViewById(R.id.editText)).getText().toString());
         TextView result = (TextView) findViewById(R.id.convertResult);
+        String stringAmount = ((EditText) findViewById(R.id.editText)).getText().toString();
+        if (stringAmount.equals("")) {
+            result.setText("No amount entered.");
+            return;
+        }
+
+        double amount = Double.parseDouble(stringAmount);
+
         double resultAmount = amount*(1/toUnit(fromValue))*toUnit(toValue);
         if ((resultAmount % 1) == 0) {
             result.setText(String.format("%d", ((int) resultAmount)));

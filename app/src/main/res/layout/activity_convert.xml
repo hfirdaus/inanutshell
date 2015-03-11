@@ -13,24 +13,22 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="FROM"
         android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:paddingBottom="16dp"/>
 
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText" />
+        android:id="@+id/editText"
+        android:paddingBottom="16dp" />
 
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/from_spinner"
         android:spinnerMode="dropdown"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:paddingBottom="32dp"/>
 
     <TextView
         android:layout_width="fill_parent"
@@ -38,8 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="TO"
         android:id="@+id/textView3"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:paddingBottom="16dp"/>
 
     <TextView
         android:layout_width="fill_parent"
@@ -47,16 +44,14 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
         android:id="@+id/convertResult"
-        android:layout_centerHorizontal="true" />
+        android:paddingBottom="16dp"/>
 
     <Spinner
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/to_spinner"
         android:spinnerMode="dropdown"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:paddingBottom= "32dp"/>
 
     <Button
         android:layout_width="fill_parent"
@@ -64,9 +59,7 @@
         android:text="CONVERT"
         android:onClick="convertValues"
         android:id="@+id/convertButton"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="46dp" />
+        android:layout_marginBottom="46dp"
+        android:layout_marginTop="16dp"/>
 
 </LinearLayout>
