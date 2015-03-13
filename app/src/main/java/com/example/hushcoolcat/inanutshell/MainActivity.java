@@ -46,12 +46,12 @@ public class MainActivity extends ActionBarActivity {
         int id = view.getId();
         switch (id) {
             case R.id.create:
-                intent = new Intent(this, createOrParse.class);
-                setContentView(R.layout.activity_create_or_parse);
+                intent= new Intent(this, createOrParse.class);
+                //setContentView(R.layout.activity_create_or_parse);
                 break;
             case R.id.find:
                 intent = new Intent(this, search.class);
-                setContentView(R.layout.activity_search);
+                //setContentView(R.layout.activity_search);
                 break;
             case R.id.convert:
                 intent = new Intent(this, convert.class);

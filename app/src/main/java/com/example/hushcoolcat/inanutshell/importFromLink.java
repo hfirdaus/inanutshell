@@ -1,5 +1,6 @@
 package com.example.hushcoolcat.inanutshell;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -57,7 +58,21 @@ public class importFromLink extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void goToEdit(ParseURL view)
+    {
+        /*
+            EditText ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
+            EditText directionsInput = (EditText) findViewById(R.id.directions_input);
+            ingredientsInput.setText(ingredients_buffer);
+            directionsInput.setText(directions_buffer);
+        */
+        //goToEdit(this);
+        Intent intent = new Intent(this,edit.class);
+        //setContentView(R.layout.activity_edit);
+        startActivity(intent);
 
+
+    }
     public void buttonPushed(View view) {
         int id = view.getId();
         if (id == R.id.import_button) {
@@ -106,27 +121,16 @@ public class importFromLink extends ActionBarActivity {
                 buffer.append("Title: " + title + "\r\n");
 
                 // Get meta info
-                Elements ingredients = doc.select("section");
-                buffer.append("META DATA\r\n");
-
-                for (Element p : ingredients) {
-                    //String name = p.attr("");
-
-                    //String content = metaElem.attr("content");
-                    //if(p.attr("class")=="recipe-ingredients")
-                    buffer.append(p.text() + "\n");
-
-                    //buffer.append("name [" + name + "] - content [" + content + "] \r\n");
+                Elements ingredients;
+                boolean foodnetwork = strings[0].contains("foodnetwork");
+                if (foodnetwork) {
+                    //ingredients = doc.select("section");
+                    buffer.append(importRecipe(doc, "section.recipe-ingredients", "section.recipeInstructions"));
                 }
-/*
-                Elements topicList = doc.select("h2.topic");
-                buffer.append("Topic list\r\n");
-                for (Element topic : topicList) {
-                    String data = topic.text();
+                else
+                    buffer.append(importRecipe(doc, "p.fl-ing", "span.plaincharacterwrap"));
 
-                    buffer.append("Data [" + data + "] \r\n");
-                }
-*/
+
             } catch (Throwable t) {
                 t.printStackTrace();
             }
@@ -142,42 +146,25 @@ public class importFromLink extends ActionBarActivity {
             //respText.setText(s);
         }
 
-/*
-    private void readStream(InputStream in) {
-        Document document = Jsoup.connect(url).get();
-        //Document doc = Jsoup.parseBodyFragment(url);
 
-        //Elements body = document.getElementsContainingText("ingredients");
-        //String bodytext = body.toString();
-        Elements paragraphs = document.select("p");
 
-        for (Element p: paragraphs)
-            System.out.println(p.text());
-        System.out.print(document);
-        /*
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new InputStreamReader(in));
-            String line = "";
-            while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+        private StringBuffer importRecipe(Document doc, String ingredients, String directions) {
+            Elements ingredientList = doc.select(ingredients);
+            Elements directionList = doc.select(directions);
+            StringBuffer ingredients_buffer = new StringBuffer();
+            StringBuffer directions_buffer = new StringBuffer();
+            StringBuffer ultimate = new StringBuffer();
+            for (Element p : ingredientList) {
+                ingredients_buffer.append(p.text() + "\n");
+            }
+            for (Element a:directionList) {
+                directions_buffer.append(a.text()+ "\n");
 
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }*/
 
-        public void importRecipe() {
 
+            ultimate = ingredients_buffer.append(directions_buffer);
+            return ultimate;
 
         }
     }

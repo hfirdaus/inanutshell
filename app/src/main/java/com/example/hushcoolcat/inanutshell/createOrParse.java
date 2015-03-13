@@ -47,7 +47,7 @@ public class createOrParse extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_create_or_parse, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -75,13 +75,17 @@ public class createOrParse extends ActionBarActivity {
     {
 
         Intent intent = null;
-        int id = view.getId();
-        if (id == R.id.write)
-            intent = new Intent(this, edit.class);
-        else
-            intent = new Intent(this, importFromLink.class);
 
+        int id = view.getId();
+        if (id == R.id.write) {
+            intent = new Intent(this, edit.class);
+
+        }
+        else {
+            intent = new Intent(this, importFromLink.class);
+        }
         startActivity(intent);
+
 
     }
 

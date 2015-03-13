@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
@@ -25,8 +26,27 @@ public class search extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
         getMenuInflater().inflate(R.menu.menu_search, menu);
 
+        /*
+        public boolean onCreateOptionsMenu(Menu menu) {
+    MenuInflater inflater = getMenuInflater();
+    inflater.inflate(R.menu.search_menu, menu);
+
+    SearchManager searchManager = (SearchManager)
+                            getSystemService(Context.SEARCH_SERVICE);
+    searchMenuItem = menu.findItem(R.id.search);
+    searchView = (SearchView) searchMenuItem.getActionView();
+
+    searchView.setSearchableInfo(searchManager.
+                            getSearchableInfo(getComponentName()));
+    searchView.setSubmitButtonEnabled(true);
+    searchView.setOnQueryTextListener(this);
+
+    return true;
+
+        */
         SearchManager searchManager =
                 (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView =
