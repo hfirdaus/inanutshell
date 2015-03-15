@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hushcoolcat.inanutshell" >
 
-    //back still not totally implemented, working on it!
-
     <uses-sdk android:minSdkVersion="11" />
-
+    //back still not totally implemented, working on it!
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -22,21 +20,14 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".edit"
             android:label="@string/title_activity_create"
-            android:parentActivityName="com.example.hushcoolcat.inanutshell.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hushcoolcat.inanutshell.MainActivity" />
-        </activity>
-        <activity
-            android:name=".createOrParse"
-            android:label="@string/title_activity_create_or_parse"
-            android:parentActivityName="com.example.hushcoolcat.inanutshell.MainActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hushcoolcat.inanutshell.MainActivity" />
@@ -44,7 +35,7 @@
         <activity
             android:name=".search"
             android:label="@string/title_activity_search"
-            android:parentActivityName="com.example.hushcoolcat.inanutshell.MainActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hushcoolcat.inanutshell.MainActivity" />
@@ -59,7 +50,7 @@
         <activity
             android:name=".convert"
             android:label="@string/title_activity_convert"
-            android:parentActivityName="com.example.hushcoolcat.inanutshell.MainActivity" >
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.hushcoolcat.inanutshell.MainActivity" />
@@ -67,10 +58,10 @@
         <activity
             android:name=".importFromLink"
             android:label="@string/title_activity_import_from_link"
-            android:parentActivityName="com.example.hushcoolcat.inanutshell.createOrParse" >
+            android:parentActivityName=".MainActivity" > // back works
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hushcoolcat.inanutshell.createOrParse" />
+                android:value="com.example.hushcoolcat.inanutshell.MainActvity" />
         </activity>
     </application>
 
