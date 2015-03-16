@@ -26,7 +26,7 @@ public class DatabaseTable {
     private static class DatabaseOpenHelper extends SQLiteOpenHelper {
 
         private final Context myHelperContext;
-s
+
         private SQLiteDatabase myDatabase;
 
         private static final String FTS_TABLE_CREATE =
