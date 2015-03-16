@@ -2,15 +2,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.hushcoolcat.inanutshell.search">
-    <item android:id="@+id/action_home"
-        android:title="home"
-        android:icon="@drawable/ic_action_home"
-        app:showAsAction="ifRoom"
-        android:onClick="onOptionsItemSelected"
-        />
+    <item android:id="@+id/action_settings" android:title="@string/action_settings"
+        android:orderInCategory="100" app:showAsAction="never" />
     <item android:id="@+id/search"
-        android:title="searchbar"
-        android:icon="@drawable/abc_ic_search_api_mtrl_alpha"
-        android:showAsAction="collapseActionView|ifRoom"
-        android:actionViewClass="android.widget.SearchView" />
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always|collapseActionView"
+        app:actionViewClass="android.support.v7.widget.SearchView" />
 </menu>

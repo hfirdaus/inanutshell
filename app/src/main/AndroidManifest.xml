@@ -3,12 +3,11 @@
     package="com.example.hushcoolcat.inanutshell" >
 
     <uses-sdk android:minSdkVersion="11" />
-    //back still not totally implemented, working on it!
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-    <android:uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
     <application
         android:allowBackup="true"
@@ -23,45 +22,33 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name=".edit"
-            android:label="@string/title_activity_create"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hushcoolcat.inanutshell.MainActivity" />
-        </activity>
-        <activity
-            android:name=".search"
-            android:label="@string/title_activity_search"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hushcoolcat.inanutshell.MainActivity" />
+
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
-
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
+        </activity>
+        <activity
+            android:name=".edit"
+            android:label="Edit" >
         </activity>
         <activity
             android:name=".convert"
-            android:label="@string/title_activity_convert"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hushcoolcat.inanutshell.MainActivity" />
+            android:label="Convert" >
         </activity>
         <activity
             android:name=".importFromLink"
-            android:label="@string/title_activity_import_from_link"
-            android:parentActivityName=".MainActivity" > // back works
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.hushcoolcat.inanutshell.MainActvity" />
+            android:label="Import Recipe" >
+        </activity>
+        <activity
+            android:name=".search"
+            android:label="Search"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable"
+                android:value=".search" />
         </activity>
     </application>
 
