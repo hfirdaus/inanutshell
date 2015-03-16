@@ -67,8 +67,8 @@ public class edit extends ActionBarActivity {
         String notes = directionsInput.getText().toString();
 
         String filename = title + ".txt";
-        String dataToSave = "Ingredients" + ingredients+ "\n" + "Directions" + directions + "\n"
-                + "Notes" + notes;
+        String dataToSave = "Ingredients\n" + ingredients+ "\n" + "Directions\n" + directions + "\n"
+                + "Notes\n" + notes;
         writeToStorage create = new writeToStorage(filename, dataToSave);
 
         presentSaveToast();
