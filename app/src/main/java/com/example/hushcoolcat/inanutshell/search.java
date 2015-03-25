@@ -1,8 +1,10 @@
 package com.example.hushcoolcat.inanutshell;
 
+import android.app.ListActivity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -11,12 +13,15 @@ import android.view.MenuItem;
 import android.app.SearchManager;
 import android.support.v7.widget.SearchView;
 
-public class search extends ActionBarActivity {
+public class search extends ListActivity {
+
+    DatabaseTable db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        db = new DatabaseTable(this);
         handleIntent(getIntent());
     }
 
@@ -37,7 +42,7 @@ public class search extends ActionBarActivity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            //use the query to search your data somehow
+            Cursor c = db.getWordMatches(query, null);
         }
     }
 

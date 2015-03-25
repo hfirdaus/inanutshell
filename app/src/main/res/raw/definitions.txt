@@ -1,0 +1,3 @@
+apple - "a fruit of magical"
+something = "else"
+wicked - "brilliant"
