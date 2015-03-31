@@ -27,14 +27,7 @@
         android:layout_toEndOf="@+id/title"
         android:inputType="text" />
 
-    <ImageButton android:id="@+id/favorite"
-        android:layout_marginTop="50sp"
-        android:layout_marginLeft="90sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@android:drawable/btn_star"
-        android:background="#00ffffff"
-        />
+
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

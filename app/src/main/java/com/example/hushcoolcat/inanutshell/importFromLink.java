@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import org.jsoup.Jsoup;
@@ -26,13 +27,24 @@ import java.net.URL;
 
 
 public class importFromLink extends ActionBarActivity {
-
+    EditText ingredientsInput;
+    EditText directionsInput;
+    EditText edtUrl;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StrictMode.ThreadPolicy policy = new StrictMode.
                 ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        Intent intent = new Intent(this, edit.class);
+        ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
+        //directionsInput = (EditText) findViewById(R.id.directions_input);
+       // ingredientsInput.setText("hi");
+       // ingredientsInput.setText("");
+        //directionsInput.setText("");
+        edtUrl = (EditText) findViewById(R.id.link_input);
+
         setContentView(R.layout.activity_import_from_link);
     }
 
@@ -41,7 +53,7 @@ public class importFromLink extends ActionBarActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_import_from_link, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -58,14 +70,10 @@ public class importFromLink extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void goToEdit(ParseURL view)
+
+    public void goToEdit(importFromLink view)
     {
-        /*
-            EditText ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
-            EditText directionsInput = (EditText) findViewById(R.id.directions_input);
-            ingredientsInput.setText(ingredients_buffer);
-            directionsInput.setText(directions_buffer);
-        */
+
         //goToEdit(this);
         Intent intent = new Intent(this,edit.class);
         //setContentView(R.layout.activity_edit);
@@ -75,37 +83,35 @@ public class importFromLink extends ActionBarActivity {
     }
     public void buttonPushed(View view) {
         int id = view.getId();
+        Button importButton = (Button)findViewById(R.id.import_button);
         if (id == R.id.import_button) {
             EditText edtUrl = (EditText) findViewById(R.id.link_input);
             String siteUrl = edtUrl.getText().toString();
-            (new ParseURL()).execute(new String[]{siteUrl});
-           // Document document = null;
-          /*  try {
-                document = Jsoup.connect(siteUrl).get();
-            } catch (IOException e) {
-                e.printStackTrace();
+            ParseURL parse = new ParseURL();
+            (parse).execute(new String[]{siteUrl});
+            String ingredients = parse.ingredientsB;
+            String directions = parse.directions;
+
+            Log.d("hello", ingredients);
+            Log.d("hello", directions);
+
+            if(parse.ingredientsB!= null && parse.directions!=null) {
+                Intent intent = new Intent(this, edit.class);
+                intent.putExtra("ingredients" ,ingredients);
+                intent.putExtra("directions", directions);
+               // intent.putExtra(directions, directionsInput.getText().toString());
+                startActivity(intent);
             }
+            else
+                Log.d("hello","null" );
 
-            Elements paragraphs = document.select("p");
-/*
-            for (Element p: paragraphs)
-                System.out.println(p.text());
-            System.out.print(document); */
-            //(new ParseURL() ).execute(new String [] {siteUrl});
-            /*try {
-                URL url = new URL(siteUrl);
-                HttpURLConnection con = (HttpURLConnection) url
-                        .openConnection();
-                readStream(con.getInputStream());
-            } catch (Exception e) {
-                e.printStackTrace();
-
-            }*/
         }
     }
 
-    private class ParseURL extends AsyncTask<String, Void, String> {
+    public class ParseURL extends AsyncTask<String, Void, String> {
 //ADD http:// at the start of URL please!!!!!!!!
+     public String ingredientsB;
+     public String directions;
         @Override
         protected String doInBackground(String... strings) {
             StringBuffer buffer = new StringBuffer();
@@ -125,10 +131,10 @@ public class importFromLink extends ActionBarActivity {
                 boolean foodnetwork = strings[0].contains("foodnetwork");
                 if (foodnetwork) {
                     //ingredients = doc.select("section");
-                    buffer.append(importRecipe(doc, "section.recipe-ingredients", "section.recipeInstructions"));
+                   importRecipe(doc, "section.recipe-ingredients", "section.recipeInstructions");
                 }
                 else
-                    buffer.append(importRecipe(doc, "p.fl-ing", "span.plaincharacterwrap"));
+                   importRecipe(doc, "p.fl-ing", "span.plaincharacterwrap");
 
 
             } catch (Throwable t) {
@@ -148,25 +154,32 @@ public class importFromLink extends ActionBarActivity {
 
 
 
-        private StringBuffer importRecipe(Document doc, String ingredients, String directions) {
+        private void importRecipe(Document doc, String ingredients, String directions) {
+
             Elements ingredientList = doc.select(ingredients);
             Elements directionList = doc.select(directions);
             StringBuffer ingredients_buffer = new StringBuffer();
             StringBuffer directions_buffer = new StringBuffer();
-            StringBuffer ultimate = new StringBuffer();
+
             for (Element p : ingredientList) {
                 ingredients_buffer.append(p.text() + "\n");
             }
+            ingredientsB = ingredients_buffer.toString();
             for (Element a:directionList) {
                 directions_buffer.append(a.text()+ "\n");
 
             }
+            directions = directions_buffer.toString();
 
 
-            ultimate = ingredients_buffer.append(directions_buffer);
-            return ultimate;
+
+
+           // ingredientsInput.setText(ingredients_buffer);
+            //directionsInput.setText(directions_buffer);
+
 
         }
+
     }
 }
 

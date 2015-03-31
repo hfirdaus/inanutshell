@@ -22,6 +22,19 @@ public class edit extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        String newString;
+       /* Bundle extras = getIntent().getExtras();
+        String value1 = null;
+        if (extras == null) {
+            // get data via the key
+            value1 = extras.getString("ingredients");
+            return;
+        }
+        if (value1 != null) {
+            EditText ingredientsInput = (EditText)findViewById(R.id.ingredients_input);
+            ingredientsInput.setText(value1);// do something with the data
+        }*/
+
         setContentView(R.layout.activity_edit);
     }
 
@@ -37,10 +50,9 @@ public class edit extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+        // as you specify a parent activity in AndroidManifest.xml.atement
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         switch (id) {
 
             case R.id.action_settings:
@@ -49,6 +61,8 @@ public class edit extends ActionBarActivity {
                 saveFile();
                 return true;
             case R.id.action_home:
+
+        //noinspection SimplifiableIfSt
                 goHome();
 
         }
@@ -83,6 +97,7 @@ public class edit extends ActionBarActivity {
         toast.show();
 
     }
+
     public void presentSaveToast()
     {
         CharSequence text = "Recipe Saved";
