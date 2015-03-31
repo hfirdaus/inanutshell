@@ -11,15 +11,17 @@ import java.io.OutputStreamWriter;
  * Created by hushcoolcat on 2015-02-19.
  */
 public class writeToStorage {
+    File directory = null;
 
     public writeToStorage(String filename, String dataToSave) {
         if (isExternalStorageWritable()) {
 
             try {
                 File sdCard = Environment.getExternalStorageDirectory();
-
-                File directory = new File(sdCard.getAbsolutePath() + "/InaNutshell");
-                directory.mkdirs();
+                if (directory == null) {
+                    directory = new File(sdCard.getAbsolutePath() + "/InaNutshell");
+                    directory.mkdirs();
+                }
                 File file = new File(directory, filename);
 
                 FileOutputStream fos = new FileOutputStream(file);

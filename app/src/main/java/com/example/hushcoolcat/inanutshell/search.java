@@ -53,8 +53,8 @@ public class search extends ListActivity {
 
     private void findFile(String searchQuery) {
         String [] queryWords = searchQuery.split(" ");
-        String [] fileNamesSaved = Context.fileList();
-        Log.d("First file", fileNamesSaved[0]);
+       // String [] fileNamesSaved = Context.fileList();
+       // Log.d("First file", fileNamesSaved[0]);
         /*
         List<String> resultsArray = new ArrayList<String>();
         ArrayList resultsArray = new String[0];

@@ -33,21 +33,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="50sp"
         android:layout_marginLeft="90sp"
-        android:button="@android:drawable/btn_star"/>
+        android:button="@android:drawable/btn_star"
+        android:id = "@+id/favourite_star"/>
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="43sp"
         android:layout_marginLeft="130sp"
-        android:button="@drawable/custom_questionmark"/>
+        android:button="@drawable/custom_questionmark"
+        android:id="@+id/to_try" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/ingredients_text"
         android:id="@+id/ingredients_text"
+        android:paddingTop="60sp"
         android:layout_marginTop="20sp"
-        android:layout_below="@+id/favorite"
         android:textSize="30sp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -68,6 +70,7 @@
         android:text="@string/directions_text"
         android:id="@+id/directions_text"
         android:textSize="30sp"
+        android:paddingTop="30sp"
         android:layout_below="@+id/ingredients_input"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

@@ -55,9 +55,10 @@ public class view extends ActionBarActivity {
         String recipetext = file.loadFile();
         TextView recipeview = (TextView)findViewById(R.id.recipeContents);
         if( recipetext==null) {
-            recipetext = "";
+            recipetext = "hello";
         }
          recipeview.setText(recipetext);
+        Log.d("viewmode", recipetext);
 
     }
 

@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,20 +24,30 @@ public class edit extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        String newString;
-       /* Bundle extras = getIntent().getExtras();
-        String value1 = null;
-        if (extras == null) {
-            // get data via the key
-            value1 = extras.getString("ingredients");
-            return;
-        }
-        if (value1 != null) {
-            EditText ingredientsInput = (EditText)findViewById(R.id.ingredients_input);
-            ingredientsInput.setText(value1);// do something with the data
-        }*/
+
 
         setContentView(R.layout.activity_edit);
+        String newIng;
+        String newDirect;
+        String newTitle;
+
+        Intent i = getIntent();
+        newIng = i.getStringExtra("ingredients");
+        newDirect=i.getStringExtra("directions");
+        newTitle = i.getStringExtra("title");
+        if (newIng==null) {
+            newIng = ""; newDirect = ""; newTitle = "";
+        }
+
+
+        //Log.d("cat", newString);
+        EditText titleInput = (EditText) findViewById(R.id.title_input);
+        EditText ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
+        EditText directionsInput = (EditText) findViewById(R.id.directions_input);
+        ingredientsInput.setText(newIng);
+        titleInput.setText(newTitle);
+        directionsInput.setText(newDirect);
+
     }
 
 
@@ -79,9 +91,18 @@ public class edit extends ActionBarActivity {
         String ingredients = ingredientsInput.getText().toString();
         String directions = directionsInput.getText().toString();
         String notes = directionsInput.getText().toString();
+        CheckBox favourite = (CheckBox)findViewById(R.id.favourite_star);
+        CheckBox toTry = (CheckBox)findViewById(R.id.to_try);
+        String tag = "Tagged as: ";
+        if (favourite.isChecked())
+                tag = tag + "favourite";
+        else if (toTry.isChecked())
+                tag = tag+ "To -Try";
+        else
+                tag = tag+"none";
 
         String filename = title + ".txt";
-        String dataToSave = "Ingredients\n" + ingredients+ "\n" + "Directions\n" + directions + "\n"
+        String dataToSave = tag+ "\n\n"+"Ingredients\n" + ingredients+ "\n" + "Directions\n" + directions + "\n"
                 + "Notes\n" + notes;
         writeToStorage create = new writeToStorage(filename, dataToSave);
 
