@@ -34,5 +34,6 @@
     <string name="title_activity_search_results">searchResults</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_view">view</string>
+    <string name="title_activity_find">find</string>
 
 </resources>

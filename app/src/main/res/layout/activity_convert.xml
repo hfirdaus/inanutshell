@@ -57,7 +57,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="CONVERT"
-        android:onClick="convertValues"
+        android:onClick="buttonPushed"
         android:id="@+id/convertButton"
         android:layout_marginBottom="46dp"
         android:layout_marginTop="16dp"/>

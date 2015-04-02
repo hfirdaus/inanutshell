@@ -1,5 +1,6 @@
 package com.example.hushcoolcat.inanutshell;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -30,7 +31,7 @@ public class convert extends ActionBarActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                convertValues(v);
+                buttonPushed(v);
             }
         });
     }
@@ -57,25 +58,38 @@ public class convert extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void convertValues(View view) {
-        String fromValue = ((Spinner) findViewById(R.id.from_spinner)).getSelectedItem().toString();
-        String toValue = ((Spinner) findViewById(R.id.to_spinner)).getSelectedItem().toString();
-        TextView result = (TextView) findViewById(R.id.convertResult);
-        String stringAmount = ((EditText) findViewById(R.id.editText)).getText().toString();
+
+    public void buttonPushed(View view) {
+        Intent intent = null;
+        int id = view.getId();
+        switch (id) {
+            case R.id.convertButton:
+                String fromValue = ((Spinner) findViewById(R.id.from_spinner)).getSelectedItem().toString();
+                String toValue = ((Spinner) findViewById(R.id.to_spinner)).getSelectedItem().toString();
+                String stringAmount = ((EditText) findViewById(R.id.editText)).getText().toString();
+                TextView result = (TextView) findViewById(R.id.convertResult);
+                double resultAmount = convertValues(fromValue, toValue, stringAmount);
+                if (resultAmount == 0) {
+                result.setText("No amount entered.");
+                }
+                else {
+                    if ((resultAmount % 1) == 0) {
+                        result.setText(String.format("%d", ((int) resultAmount)));
+                    }
+                    else {
+                        result.setText(String.format("%.2f", resultAmount));
+                    }
+                }
+                break;
+        }
+    }
+
+    public double convertValues(String fromValue, String toValue, String stringAmount) {
         if (stringAmount.equals("")) {
-            result.setText("No amount entered.");
-            return;
+            return 0;
         }
-
         double amount = Double.parseDouble(stringAmount);
-
-        double resultAmount = amount*(1/toUnit(fromValue))*toUnit(toValue);
-        if ((resultAmount % 1) == 0) {
-            result.setText(String.format("%d", ((int) resultAmount)));
-        }
-        else {
-            result.setText(String.format("%.2f", resultAmount));
-        }
+        return (amount*(1/toUnit(fromValue))*toUnit(toValue));
     }
 
     public double toUnit(String unit) {

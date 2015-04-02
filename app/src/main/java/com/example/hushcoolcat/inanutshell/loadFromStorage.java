@@ -27,34 +27,10 @@ public class loadFromStorage {
         fileToRead = filename + ".txt";
         sdCard = Environment.getExternalStorageDirectory();
         directory = new File(sdCard.getAbsolutePath() + "/InaNutshell");
-        //File file = File(directory, filename);
-        //String yourFilePath = context.getFilesDir() + "/" + "InaNutshell" + "/" + filename + ".txt";
-        //yourFile = new File( sdCard.getAbsolutePath() + "/InaNutshell/" + filename + ".txt");
-        Log.d("Filepath", sdCard.getAbsolutePath());
         file = new File(directory, fileToRead);
     }
 
     public String loadFile() {
-       // String text = "a";
-        /*String line= "";
-        File sdcard = Environment.getExternalStorageDirectory();
-        File file = new File (sdcard, "hello.txt");
-        StringBuilder text = new StringBuilder();
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(file));
-
-            while ((line=br.readLine())!=null){
-                text.append(line);
-                text.append('\n');
-            }
-            br.close();
-
-        }
-        catch(IOException e){
-
-        }
-
-        Log.d("pleasework", text.toString());*/
         StringBuilder inputStringBuilder = new StringBuilder();
         try {
             FileInputStream fis = new FileInputStream(file);
@@ -81,29 +57,6 @@ public class loadFromStorage {
 
         return inputStringBuilder.toString();
     }
-
-
-
-    /*
-        int ch;
-        StringBuffer fileContent = new StringBuffer("");
-        FileInputStream fis
-        try {
-            fis = fis.openFileInput(filename);
-            try {
-                while( (ch = fis.read()) != -1)
-                    fileContent.append((char)ch);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        String data = new String(fileContent);
-
-    */
-
 
 }
 

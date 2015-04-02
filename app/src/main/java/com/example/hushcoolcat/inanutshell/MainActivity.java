@@ -45,25 +45,18 @@ public class MainActivity extends ActionBarActivity {
         int id = view.getId();
         switch (id) {
             case R.id.write:
-                intent= new Intent(this, edit.class);
+                intent = new Intent(this, edit.class);
                 break;
             case R.id.import_recipe:
                 intent = new Intent(this, importFromLink.class);
                 break;
             case R.id.find:
-                intent = new Intent(this, view.class);
+                intent = new Intent(this, find.class);
                 break;
             case R.id.convert:
                 intent = new Intent(this, convert.class);
                 break;
         }
         startActivity(intent);
-
-        /*
-        Intent intent= new Intent(this, createOrParse.class);
-        startActivity(intent);
-
-         */
-
     }
 }

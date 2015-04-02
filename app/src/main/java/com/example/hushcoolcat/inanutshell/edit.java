@@ -20,12 +20,11 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 
 public class edit extends ActionBarActivity {
-
+    String filename = null;
+    String dataToSave = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
         setContentView(R.layout.activity_edit);
         String newIng;
         String newDirect;
@@ -38,9 +37,6 @@ public class edit extends ActionBarActivity {
         if (newIng==null) {
             newIng = ""; newDirect = ""; newTitle = "";
         }
-
-
-        //Log.d("cat", newString);
         EditText titleInput = (EditText) findViewById(R.id.title_input);
         EditText ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
         EditText directionsInput = (EditText) findViewById(R.id.directions_input);
@@ -60,9 +56,6 @@ public class edit extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.atement
         int id = item.getItemId();
 
         switch (id) {
@@ -70,43 +63,54 @@ public class edit extends ActionBarActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_save:
-                saveFile();
+                EditText titleInput = (EditText) findViewById(R.id.title_input);
+                EditText ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
+                EditText directionsInput = (EditText) findViewById(R.id.directions_input);
+                EditText notesInput = (EditText)findViewById(R.id.notes_input);
+                String title = titleInput.getText().toString();
+                String ingredients = ingredientsInput.getText().toString();
+                String directions = directionsInput.getText().toString();
+                String notes = notesInput.getText().toString();
+                boolean validSave = saveFile(title, ingredients, directions, notes);
+
+                if (validSave == true) {
+                    writeToStorage create = new writeToStorage(filename, dataToSave);
+                    presentSaveToast();
+                }
+                else {
+                    invalidSaveToast();
+                }
                 return true;
             case R.id.action_home:
-
-        //noinspection SimplifiableIfSt
                 goHome();
 
         }
 
         return super.onOptionsItemSelected(item);
     }
-    public void saveFile() {
-        EditText titleInput = (EditText) findViewById(R.id.title_input);
-        EditText ingredientsInput = (EditText) findViewById(R.id.ingredients_input);
-        EditText directionsInput = (EditText) findViewById(R.id.directions_input);
-        EditText notesInput = (EditText)findViewById(R.id.notes_input);
+    public boolean saveFile(String title, String ingredients, String directions, String notes) {
+        boolean isValid = true;
 
-        String title = titleInput.getText().toString();
-        String ingredients = ingredientsInput.getText().toString();
-        String directions = directionsInput.getText().toString();
-        String notes = directionsInput.getText().toString();
-        CheckBox favourite = (CheckBox)findViewById(R.id.favourite_star);
-        CheckBox toTry = (CheckBox)findViewById(R.id.to_try);
-        String tag = "Tagged as: ";
-        if (favourite.isChecked())
+        if ((title.equals("") || ingredients.equals("") || directions.equals(""))) {
+           isValid = false;
+        }
+        else {
+            CheckBox favourite = (CheckBox)findViewById(R.id.favourite_star);
+            CheckBox toTry = (CheckBox)findViewById(R.id.to_try);
+            String tag = "Tagged as: ";
+            if (favourite.isChecked())
                 tag = tag + "favourite";
-        else if (toTry.isChecked())
+            else if (toTry.isChecked())
                 tag = tag+ "To -Try";
-        else
+            else
                 tag = tag+"none";
 
-        String filename = title + ".txt";
-        String dataToSave = tag+ "\n\n"+"Ingredients\n" + ingredients+ "\n" + "Directions\n" + directions + "\n"
-                + "Notes\n" + notes;
-        writeToStorage create = new writeToStorage(filename, dataToSave);
-
-        presentSaveToast();
+            filename = title + ".txt";
+            dataToSave = tag+ "\n\n"+"Ingredients\n" + ingredients+ "\n" + "Directions\n" + directions + "\n"
+                    + "Notes\n" + notes;
+            //writeToStorage create = new writeToStorage(filename, dataToSave);
+        }
+        return isValid;
     }
 
     public void presentToast(CharSequence text)
@@ -117,6 +121,10 @@ public class edit extends ActionBarActivity {
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
 
+    }
+    public void invalidSaveToast() {
+        CharSequence text = "One or more required input areas are not filled.";
+        presentToast(text);
     }
 
     public void presentSaveToast()
