@@ -2,34 +2,27 @@ package com.example.hushcoolcat.inanutshell;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jsoup.Jsoup;
-import org.jsoup.*;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.apache.commons.lang3.StringUtils;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 
 public class importFromLink extends ActionBarActivity {
     String ingredients;
     String directions;
     Intent intent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,15 +56,15 @@ public class importFromLink extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void goToEdit(String title, String ingredients, String directions)
-    {
-        intent.putExtra("ingredients" , ingredients);
+    public void goToEdit(String title, String ingredients, String directions) {
+        intent.putExtra("ingredients", ingredients);
         intent.putExtra("title", title);
         intent.putExtra("directions", directions);
         startActivity(intent);
 
 
     }
+
     public void buttonPushed(View view) {
         int id = view.getId();
 
@@ -81,7 +74,7 @@ public class importFromLink extends ActionBarActivity {
             ParseURL parse = new ParseURL();
             (parse).execute(new String[]{siteUrl});
 
-           // startActivity(intent);
+            // startActivity(intent);
         }
     }
 
@@ -91,8 +84,8 @@ public class importFromLink extends ActionBarActivity {
         @Override
         public String doInBackground(String... strings) {
             StringBuffer buffer = new StringBuffer();
-            if( ! strings[0].contains("http://"))
-                strings[0]= strings[0].replaceFirst("", "http://");
+            if (!strings[0].contains("http://"))
+                strings[0] = strings[0].replaceFirst("", "http://");
             try {
                 Log.d("JSwa", "Connecting to [" + strings[0] + "]");
                 Document doc = Jsoup.connect(strings[0]).get();
@@ -107,10 +100,9 @@ public class importFromLink extends ActionBarActivity {
                 boolean foodnetwork = strings[0].contains("foodnetwork");
                 if (foodnetwork) {
                     //ingredients = doc.select("section");
-                   buffer.append(importRecipe(doc, "section.recipe-ingredients", "section.recipeInstructions"));
-                }
-                else
-                   buffer.append(importRecipe(doc, "p.fl-ing", "span.plaincharacterwrap"));
+                    buffer.append(importRecipe(doc, "section.recipe-ingredients", "section.recipeInstructions"));
+                } else
+                    buffer.append(importRecipe(doc, "p.fl-ing", "span.plaincharacterwrap"));
 
 
             } catch (Throwable t) {
@@ -126,15 +118,14 @@ public class importFromLink extends ActionBarActivity {
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
 
-            String title =StringUtils.substringBetween(s, "Title", "Ingredients");
+            String title = StringUtils.substringBetween(s, "Title", "Ingredients");
             String ingredients = StringUtils.substringBetween(s, "Ingredients", "Directions");
             String directions = StringUtils.substringBetween(s, "Directions", "END");
             //Log.d("pleasework", ingredients);
-            goToEdit(title, ingredients,directions );
+            goToEdit(title, ingredients, directions);
 
 
         }
-
 
 
         public StringBuffer importRecipe(Document doc, String ingredients, String directions) {
@@ -149,8 +140,8 @@ public class importFromLink extends ActionBarActivity {
                 ingredients_buffer.append(p.text() + "\n");
             }
             ingredients_buffer.append("Directions");
-            for (Element a:directionList) {
-                directions_buffer.append(a.text()+ "\n");
+            for (Element a : directionList) {
+                directions_buffer.append(a.text() + "\n");
 
             }
             directions_buffer.append("END");

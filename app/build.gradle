@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "com.example.hushcoolcat.inanutshell"
@@ -23,5 +22,5 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'org.jsoup:jsoup:1.8.1'
-    compile files('src/main/res/libs/commons-lang3-3.3.2.jar')
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
 }
