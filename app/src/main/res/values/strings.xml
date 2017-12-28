@@ -35,5 +35,7 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_view">view</string>
     <string name="title_activity_find">find</string>
+    <string name="ingredients_hint">Write each ingredient on a new line.</string>
+    <string name="directions_hint">Write each step on a new line.</string>
 
 </resources>

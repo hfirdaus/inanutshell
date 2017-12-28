@@ -68,12 +68,22 @@ public class edit extends ActionBarActivity {
                 EditText directionsInput = (EditText) findViewById(R.id.directions_input);
                 EditText notesInput = (EditText)findViewById(R.id.notes_input);
                 String title = titleInput.getText().toString();
+//                String[] ingredientsList = ingredientsInput.getText().toString().split("\n");
+//                for (int i = 0; i < ingredientsList.length; i++) {
+//                    ingredientsList[i] = " - " + ingredientsList[i] + "\n";
+//                }
                 String ingredients = ingredientsInput.getText().toString();
+
+//                String[] directionsList = directionsInput.getText().toString().split("\n");
+//                for (int i = 0; i < directionsList.length; i++) {
+//                    int number = i+1;
+//                    directionsList[i] = number + ". " + directionsList[i] + "\n";
+//                }
                 String directions = directionsInput.getText().toString();
                 String notes = notesInput.getText().toString();
                 boolean validSave = saveFile(title, ingredients, directions, notes);
 
-                if (validSave == true) {
+                if (validSave) {
                     writeToStorage create = new writeToStorage(filename, dataToSave);
                     presentSaveToast();
                 }
@@ -96,12 +106,12 @@ public class edit extends ActionBarActivity {
         }
         else {
             CheckBox favourite = (CheckBox)findViewById(R.id.favourite_star);
-            CheckBox toTry = (CheckBox)findViewById(R.id.to_try);
+//            CheckBox toTry = (CheckBox)findViewById(R.id.to_try);
             String tag = "Tagged as: ";
             if (favourite.isChecked())
                 tag = tag + "favourite";
-            else if (toTry.isChecked())
-                tag = tag+ "To -Try";
+//            else if (toTry.isChecked())
+  //              tag = tag+ "To -Try";
             else
                 tag = tag+"none";
 
