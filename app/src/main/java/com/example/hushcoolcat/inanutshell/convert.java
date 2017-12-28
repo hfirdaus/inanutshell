@@ -19,11 +19,11 @@ public class convert extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convert);
         Spinner spinner1 = (Spinner) findViewById(R.id.from_spinner);
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this, R.array.convert_options, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter1 = MyArrayAdapter.createFromResource(this, R.array.convert_options, android.R.layout.simple_spinner_item);
         adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner1.setAdapter(adapter1);
         Spinner spinner2 = (Spinner) findViewById(R.id.to_spinner);
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.convert_options, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter2 = MyArrayAdapter.createFromResource(this, R.array.convert_options, android.R.layout.simple_spinner_item);
         adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner2.setAdapter(adapter2);
 
